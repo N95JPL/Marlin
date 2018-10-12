@@ -246,6 +246,58 @@ static void lcd_setFont(const char font_nr) {
           if (bottom < LCD_PIXEL_HEIGHT) u8g.drawBox(0, bottom, LCD_PIXEL_WIDTH, LCD_PIXEL_HEIGHT - bottom);
         #endif
       } while (u8g.nextPage());
+        #if ENABLED(CUSTOM_BOOTSCREEN_ANIMATION)
+        int anim_frame = 1;
+        int max_anim_frame = CUSTOM_BOOTSCREEN_FRAMES;
+        while (anim_frame < max_anim_frame) {
+          safe_delay(CUSTOM_BOOTSCREEN_FRAME_TIME);
+          anim_frame = anim_frame+1;
+          u8g.firstPage();
+          do {
+            u8g.drawBitmapP(
+              left, top,
+              CEILING(CUSTOM_BOOTSCREEN_BMPWIDTH, 8), CUSTOM_BOOTSCREEN_BMPHEIGHT,
+                #if CUSTOM_BOOTSCREEN_FRAMES == 2 
+                  anim_frame == 2 ? custom_start_bmp2 : custom_start_bmp2
+                #elif CUSTOM_BOOTSCREEN_FRAMES == 3 
+                  anim_frame == 2 ? custom_start_bmp2 : anim_frame == 3 ? custom_start_bmp3 : custom_start_bmp3
+                #elif CUSTOM_BOOTSCREEN_FRAMES == 4 
+                  anim_frame == 2 ? custom_start_bmp2 : anim_frame == 3 ? custom_start_bmp3 : anim_frame == 4 ? custom_start_bmp4 : custom_start_bmp4
+                #elif CUSTOM_BOOTSCREEN_FRAMES == 5 
+                  anim_frame == 2 ? custom_start_bmp2 : anim_frame == 3 ? custom_start_bmp3 : anim_frame == 4 ? custom_start_bmp4 : anim_frame == 5 ? custom_start_bmp5 : 
+                  custom_start_bmp5
+                #elif CUSTOM_BOOTSCREEN_FRAMES == 6 
+                  anim_frame == 2 ? custom_start_bmp2 : anim_frame == 3 ? custom_start_bmp3 : anim_frame == 4 ? custom_start_bmp4 : anim_frame == 5 ? custom_start_bmp5 : 
+                  anim_frame == 6 ? custom_start_bmp6 : custom_start_bmp6
+                #elif CUSTOM_BOOTSCREEN_FRAMES == 7 
+                  anim_frame == 2 ? custom_start_bmp2 : anim_frame == 3 ? custom_start_bmp3 : anim_frame == 4 ? custom_start_bmp4 : anim_frame == 5 ? custom_start_bmp5 : 
+                  anim_frame == 6 ? custom_start_bmp6 : anim_frame == 7 ? custom_start_bmp7 : custom_start_bmp7
+                #elif CUSTOM_BOOTSCREEN_FRAMES == 8
+                  anim_frame == 2 ? custom_start_bmp2 : anim_frame == 3 ? custom_start_bmp3 : anim_frame == 4 ? custom_start_bmp4 : anim_frame == 5 ? custom_start_bmp5 : 
+                  anim_frame == 6 ? custom_start_bmp6 : anim_frame == 7 ? custom_start_bmp7 : anim_frame == 8 ? custom_start_bmp8 : custom_start_bmp8
+                #elif CUSTOM_BOOTSCREEN_FRAMES == 9
+                  anim_frame == 2 ? custom_start_bmp2 : anim_frame == 3 ? custom_start_bmp3 : anim_frame == 4 ? custom_start_bmp4 : anim_frame == 5 ? custom_start_bmp5 : 
+                  anim_frame == 6 ? custom_start_bmp6 : anim_frame == 7 ? custom_start_bmp7 : anim_frame == 8 ? custom_start_bmp8 : anim_frame == 9 ? custom_start_bmp9 : 
+                  custom_start_bmp9
+                #elif CUSTOM_BOOTSCREEN_FRAMES == 10
+                  anim_frame == 2 ? custom_start_bmp2 : anim_frame == 3 ? custom_start_bmp3 : anim_frame == 4 ? custom_start_bmp4 : anim_frame == 5 ? custom_start_bmp5 : 
+                  anim_frame == 6 ? custom_start_bmp6 : anim_frame == 7 ? custom_start_bmp7 : anim_frame == 8 ? custom_start_bmp8 : anim_frame == 9 ? custom_start_bmp9 : 
+                  anim_frame == 10 ? custom_start_bmp10 : custom_start_bmp10
+                #else
+                  custom_start_bmp         
+                #endif
+              
+            );
+            #if ENABLED(CUSTOM_BOOTSCREEN_INVERTED)
+              u8g.setColorIndex(1);
+              if (top) u8g.drawBox(0, 0, LCD_PIXEL_WIDTH, top);
+              if (left) u8g.drawBox(0, top, left, CUSTOM_BOOTSCREEN_BMPHEIGHT);
+              if (right < LCD_PIXEL_WIDTH) u8g.drawBox(right, top, LCD_PIXEL_WIDTH - right, CUSTOM_BOOTSCREEN_BMPHEIGHT);
+              if (bottom < LCD_PIXEL_HEIGHT) u8g.drawBox(0, bottom, LCD_PIXEL_WIDTH, LCD_PIXEL_HEIGHT - bottom);
+            #endif
+          } while (u8g.nextPage());
+        }
+      #endif
       safe_delay(CUSTOM_BOOTSCREEN_TIMEOUT);
     }
 
