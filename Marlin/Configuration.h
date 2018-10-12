@@ -92,6 +92,9 @@
 
 // Enable to show the bitmap in Marlin/_Bootscreen.h on startup.
 //#define SHOW_CUSTOM_BOOTSCREEN
+//#define CUSTOM_BOOTSCREEN_ANIMATION // Enable to show the Animation Bitmap Sequence in Marlin/_Bootscreen.h on startup.
+//#define CUSTOM_BOOTSCREEN_FRAMES 5 // Number of frames in the Animation
+//#define CUSTOM_BOOTSCREEN_FRAME_TIME 100 //Time in ms to display each Frame
 
 // Enable to show the bitmap in Marlin/_Statusscreen.h on the status screen.
 //#define CUSTOM_STATUS_SCREEN_IMAGE
