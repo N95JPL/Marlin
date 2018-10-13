@@ -332,7 +332,7 @@
     B00000000,B00000000,B00000000,B00000000,B00001110,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000
   };
 
-  const unsigned char *custom_bootscreen_animation[] PROGMEM = {
+  const unsigned char * const custom_bootscreen_animation[] PROGMEM = {
     custom_start_bmp, custom_start_bmp2, custom_start_bmp3, custom_start_bmp4, custom_start_bmp5
   };
 
